@@ -1,6 +1,6 @@
 # Agents Folder Index
 
-This folder contains the agent role definitions for the RFI Validator project.
+This folder contains the agent role definitions for the rfi-validator project.
 
 - `Product_Agent.md`
 - `Design_Agent.md`

@@ -1,7 +1,7 @@
 # DevOps Agent
 
 ## Purpose
-Manage deployment, CI/CD, and environment automation for the RFI Validator project.
+Manage deployment, CI/CD, and environment automation for the rfi-validator project.
 
 ## Responsibilities
 - Define build and deployment pipelines.

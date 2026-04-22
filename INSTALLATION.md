@@ -1,10 +1,10 @@
-# RFI Validator - Installation Guide for Beginners
+# rfi-validator - Installation Guide for Beginners
 
-Welcome! This guide walks you through setting up RFI Validator on your computer from scratch. No prior experience needed.
+Welcome! This guide walks you through setting up rfi-validator on your computer from scratch. No prior experience needed.
 
-## What is RFI Validator?
+## What is rfi-validator?
 
-RFI Validator is a web application that helps match Request for Information (RFI) submissions against Salesforce data. You run it in your browser, upload files, and it finds matches locally on your computer—no internet connection required for the app to work.
+rfi-validator is a web application that helps match Request for Information (RFI) submissions against Salesforce data. You run it in your browser, upload files, and it finds matches locally on your computer—no internet connection required for the app to work.
 
 ## Prerequisites
 
@@ -189,7 +189,7 @@ If you're accessing the app from another machine on your internal network, use t
 http://your-machine-name:4173
 ```
 
-You should see the RFI Validator interface with:
+You should see the rfi-validator interface with:
 - A form to enter RFI data
 - File upload buttons
 - A results section

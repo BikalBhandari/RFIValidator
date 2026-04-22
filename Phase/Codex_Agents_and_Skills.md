@@ -1,7 +1,7 @@
-# Codex Agents and Skills for RFI Validator SDLC
+# Codex Agents and Skills for rfi-validator SDLC
 
 ## Overview
-This document defines the Codex agent roles and their required skills to support a full software development lifecycle (SDLC) for the RFI Validator project.
+This document defines the Codex agent roles and their required skills to support a full software development lifecycle (SDLC) for the rfi-validator project.
 
 ## Agent Roles
 

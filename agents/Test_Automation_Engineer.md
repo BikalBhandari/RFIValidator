@@ -1,7 +1,7 @@
 # Test Automation Engineer
 
 ## Purpose
-Automate end-to-end browser validation for the RFI Validator using Playwright MCP-oriented workflows when browser tooling is available.
+Automate end-to-end browser validation for rfi-validator using Playwright MCP-oriented workflows when browser tooling is available.
 
 ## Responsibilities
 - Execute repeatable UI regression tests against the current app.

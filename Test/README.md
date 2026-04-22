@@ -1,6 +1,6 @@
 # Test Suite
 
-All tests for the RFI Validator are consolidated under this folder. Run tests from the project root with `npm run verify`.
+All tests for rfi-validator are consolidated under this folder. Run tests from the project root with `npm run verify`.
 
 ## Structure
 

@@ -1,7 +1,7 @@
 # Product Requirements Document (PRD)
 
 ## Product Name
-RFI Validator
+rfi-validator
 
 ## Purpose
 Enable team members without Salesforce access to validate RFI submissions by comparing uploaded Salesforce export data against form entries, without requiring Salesforce login.
@@ -13,7 +13,7 @@ Certain team members cannot access Salesforce directly. When an RFI form is subm
 1. An RFI form is completed by a user.
 2. A validating team member without Salesforce access receives the submission.
 3. The validating user obtains a CSV export from Salesforce from a colleague with access.
-4. The validating user uploads the exported file to the RFI Validator page.
+4. The validating user uploads the exported file to the rfi-validator page.
 5. The application compares key identifying data between the RFI submission and the Salesforce export.
 6. Matching results are displayed clearly to the validating user.
 
@@ -65,7 +65,7 @@ Certain team members cannot access Salesforce directly. When an RFI form is subm
 4. Clear error messages for invalid uploads.
 
 ## User Flow
-1. User opens the RFI Validator page.
+1. User opens the rfi-validator page.
 2. User creates one or more RFI submissions in the form builder.
 3. User selects the Salesforce export file.
 4. User uploads the file.
@@ -147,7 +147,7 @@ Certain team members cannot access Salesforce directly. When an RFI form is subm
 - Allow saving validation sessions for later review.
 
 ## Codex Agents and Skills
-- Define codex-based roles to support the full SDLC for the RFI Validator project.
+- Define codex-based roles to support the full SDLC for the rfi-validator project.
 - Agent roles include Product, Design, Development, Integration, Test, DevOps, and Documentation.
 - Skills cover requirements, UX design, HTML/JavaScript development, CSV parsing, scheduled refresh workflows, automated testing, deployment, and documentation.
 - Use the agents to coordinate discovery, planning, implementation, validation, deployment, and operations.

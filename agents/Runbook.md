@@ -54,7 +54,7 @@ Act as the agent defined in /Users/bbhanda1/Desktop/RFI Validator/agents/Product
 Follow that file exactly.
 
 Task:
-Review and refine the product requirements for the RFI Validator based on the existing PRD.
+Review and refine the product requirements for rfi-validator based on the existing PRD.
 
 Inputs:
 - /Users/bbhanda1/Desktop/RFI Validator/RFI_Validator_PRD.md
@@ -86,7 +86,7 @@ Act as the agent defined in /Users/bbhanda1/Desktop/RFI Validator/agents/Design_
 Follow that file exactly.
 
 Task:
-Design the UX, page flow, and interaction model for the current RFI Validator requirements.
+Design the UX, page flow, and interaction model for the current rfi-validator requirements.
 
 Inputs:
 - /Users/bbhanda1/Desktop/RFI Validator/RFI_Validator_PRD.md
@@ -120,7 +120,7 @@ Act as the agent defined in /Users/bbhanda1/Desktop/RFI Validator/agents/Develop
 Follow that file exactly.
 
 Task:
-Implement the next approved RFI Validator feature or fix based on the PRD and design guidance.
+Implement the next approved rfi-validator feature or fix based on the PRD and design guidance.
 
 Inputs:
 - /Users/bbhanda1/Desktop/RFI Validator/RFI_Validator_PRD.md
@@ -151,7 +151,7 @@ Act as the agent defined in /Users/bbhanda1/Desktop/RFI Validator/agents/Integra
 Follow that file exactly.
 
 Task:
-Design or implement the integration aspects for the RFI Validator, including data refresh workflow, storage approach, import/export handling, and future Salesforce integration readiness.
+Design or implement the integration aspects for rfi-validator, including data refresh workflow, storage approach, import/export handling, and future Salesforce integration readiness.
 
 Inputs:
 - /Users/bbhanda1/Desktop/RFI Validator/RFI_Validator_PRD.md
@@ -182,7 +182,7 @@ Act as the agent defined in /Users/bbhanda1/Desktop/RFI Validator/agents/Test_Ag
 Follow that file exactly.
 
 Task:
-Run a QA pass against the current RFI Validator app.
+Run a QA pass against the current rfi-validator app.
 
 Inputs:
 - /Users/bbhanda1/Desktop/RFI Validator/Test Data/report1775759327714.csv
@@ -211,7 +211,7 @@ Act as the agent defined in /Users/bbhanda1/Desktop/RFI Validator/agents/Test_Au
 Follow that file exactly.
 
 Task:
-Run automated browser-based validation for the current RFI Validator app.
+Run automated browser-based validation for the current rfi-validator app.
 
 Inputs:
 - /Users/bbhanda1/Desktop/RFI Validator/Test Data/report1775759327714_rfi_fixture.json
@@ -250,7 +250,7 @@ Act as the agent defined in /Users/bbhanda1/Desktop/RFI Validator/agents/Documen
 Follow that file exactly.
 
 Task:
-Update project documentation for the current state of the RFI Validator.
+Update project documentation for the current state of rfi-validator.
 
 Inputs:
 - /Users/bbhanda1/Desktop/RFI Validator/RFI_Validator_PRD.md

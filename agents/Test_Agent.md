@@ -1,7 +1,7 @@
 # Test Agent
 
 ## Purpose
-Ensure the RFI Validator works reliably through test planning, validation, and quality checks.
+Ensure rfi-validator works reliably through test planning, validation, and quality checks.
 
 ## Responsibilities
 - Create functional and edge-case test plans.

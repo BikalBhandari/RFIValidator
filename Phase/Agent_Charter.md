@@ -1,4 +1,4 @@
-# RFI Validator Agent Charter
+# rfi-validator Agent Charter
 
 ## Purpose
 Define agent roles, responsibilities, decision authorities, and handoff criteria for coordinated SDLC execution.

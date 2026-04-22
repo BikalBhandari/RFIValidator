@@ -1,7 +1,7 @@
 # Product Agent
 
 ## Purpose
-Own the product requirements, user stories, acceptance criteria, and stakeholder alignment for the RFI Validator project.
+Own the product requirements, user stories, acceptance criteria, and stakeholder alignment for the rfi-validator project.
 
 ## Responsibilities
 - Define the problem statement and target users.

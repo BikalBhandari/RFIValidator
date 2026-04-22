@@ -1,4 +1,4 @@
-# RFI Validator
+# rfi-validator
 
 A web application for validating Request for Information (RFI) submissions against Salesforce CSV export data, with support for data comparison, filtering, and test data generation.
 
@@ -151,7 +151,7 @@ Upload limit: **500 rows per dataset** (enforced for Salesforce exports and RFI 
 - [E2E Test Documentation](Test/e2e/README.md)
 - [Minimal Release File List](RELEASE_FILES.md)
 - [Agent Workflows](agents/)
-- [RFI Validator PRD](RFI_Validator_PRD.md)
+- [rfi-validator PRD](RFI_Validator_PRD.md)
 
 ## License
 

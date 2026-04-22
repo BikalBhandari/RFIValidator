@@ -1,4 +1,4 @@
-# RFI Validator Test Summary
+# rfi-validator Test Summary
 
 ## Overview
 Comprehensive test coverage across unit, integration, and end-to-end tests. All tests pass without skips or failures.

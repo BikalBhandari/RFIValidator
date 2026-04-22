@@ -1,7 +1,7 @@
 # Design Agent
 
 ## Purpose
-Design the user experience, UI flow, and information architecture for the RFI Validator application.
+Design the user experience, UI flow, and information architecture for the rfi-validator application.
 
 ## Responsibilities
 - Create page layout and interaction flow.

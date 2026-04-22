@@ -1,8 +1,8 @@
-# Claude Code Instructions for RFI Validator
+# Claude Code Instructions for rfi-validator
 
 ## Project Context
 
-RFI Validator is a client-side web application for matching Request for Information submissions against Salesforce CSV export data. It's deployment-ready with full test coverage (17 unit + 9 e2e tests).
+rfi-validator is a client-side web application for matching Request for Information submissions against Salesforce CSV export data. It's deployment-ready with full test coverage (17 unit + 9 e2e tests).
 
 **Current Status:** ✅ Ready for non-prod deployment
 

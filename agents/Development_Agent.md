@@ -1,7 +1,7 @@
 # Development Agent
 
 ## Purpose
-Implement the RFI Validator application, including file parsing, matching logic, and UI behavior.
+Implement the rfi-validator application, including file parsing, matching logic, and UI behavior.
 
 ## Responsibilities
 - Build the HTML/CSS/JavaScript interface.

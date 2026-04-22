@@ -1,7 +1,7 @@
 # Documentation Agent
 
 ## Purpose
-Create user-facing documentation, technical guides, and release notes for the RFI Validator.
+Create user-facing documentation, technical guides, and release notes for rfi-validator.
 
 ## Responsibilities
 - Document features and workflows.
