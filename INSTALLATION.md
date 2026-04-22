@@ -96,10 +96,11 @@ You have two options:
 
 ```bash
 git clone <repository-url>
-cd "RFI Validator"
+cd <project-folder>
 ```
 
 Replace `<repository-url>` with your project's Git URL.
+Replace `<project-folder>` with the folder created by the clone command.
 
 ### Option B: Manual Download
 
@@ -108,10 +109,10 @@ Replace `<repository-url>` with your project's Git URL.
 3. Open terminal and navigate to the folder:
 
 ```bash
-cd ~/Desktop/"RFI Validator"
+cd /path/to/<project-folder>
 ```
 
-(On Windows, use backslashes or open PowerShell in the folder)
+(On Windows, use backslashes or open PowerShell in the project folder.)
 
 ---
 
@@ -252,7 +253,7 @@ First, make sure you're in the right folder:
 pwd
 ```
 
-Should show: `/Users/your-username/Desktop/RFI Validator` (or similar)
+Should show your project directory path.
 
 Then try again:
 
