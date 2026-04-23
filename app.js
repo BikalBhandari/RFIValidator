@@ -77,6 +77,8 @@ const profileNameInput = document.getElementById('profile-name');
 const profileRoleInput = document.getElementById('profile-role');
 const profileAvatarInput = document.getElementById('profile-avatar');
 const profileIdentifierInput = document.getElementById('profile-identifier');
+const profileSaveButton = document.getElementById('profile-save-button');
+const profileSaveStatusEl = document.getElementById('profile-save-status');
 const profilePreviewNameEl = document.getElementById('profile-preview-name');
 const profilePreviewRoleEl = document.getElementById('profile-preview-role');
 const profilePreviewAvatarEl = document.getElementById('profile-preview-avatar');
@@ -98,6 +100,8 @@ let resultsSearchQuery = '';
 let lastGeneratedTestData = null;
 let lastGeneratedBatchData = [];
 let generatorBatchCount = 1;
+let activeProfile = null;
+let draftProfile = null;
 const EXPORT_ROW_LIMIT = 500;
 const RFI_ROW_LIMIT = 500;
 
@@ -545,9 +549,9 @@ function normalizeAvatarInitials(value, fallbackName = '') {
 
 function getDefaultProfile() {
   return {
-    name: topbarUserNameEl?.textContent?.trim() || 'Current User',
-    role: topbarUserRoleEl?.textContent?.trim() || 'Admin',
-    avatar: topbarAvatarEl?.textContent?.trim() || '',
+    name: '',
+    role: '',
+    avatar: '',
     identifier: ''
   };
 }
@@ -579,37 +583,102 @@ function storeProfile(profile) {
   }
 }
 
-function renderProfile(profile) {
-  const nextName = String(profile?.name || '').trim() || 'Current User';
-  const nextRole = String(profile?.role || '').trim() || 'Admin';
-  const rawAvatar = String(profile?.avatar || '').trim();
-  const nextAvatar = normalizeAvatarInitials(rawAvatar, nextName);
-  const nextIdentifier = String(profile?.identifier || '').trim();
-
-  if (topbarUserNameEl) topbarUserNameEl.textContent = nextName;
-  if (topbarUserRoleEl) topbarUserRoleEl.textContent = nextRole;
-  if (topbarAvatarEl) topbarAvatarEl.textContent = nextAvatar;
-
-  if (profileNameInput) profileNameInput.value = nextName;
-  if (profileRoleInput) profileRoleInput.value = nextRole;
-  if (profileAvatarInput) profileAvatarInput.value = rawAvatar.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 2);
-  if (profileIdentifierInput) profileIdentifierInput.value = nextIdentifier;
-
-  if (profilePreviewNameEl) profilePreviewNameEl.textContent = nextName;
-  if (profilePreviewRoleEl) profilePreviewRoleEl.textContent = nextRole;
-  if (profilePreviewAvatarEl) profilePreviewAvatarEl.textContent = nextAvatar;
-}
-
-function getProfileFromInputs() {
+function normalizeProfile(profile) {
   return {
-    name: String(profileNameInput?.value || '').trim(),
-    role: String(profileRoleInput?.value || '').trim(),
-    avatar: String(profileAvatarInput?.value || '')
+    name: String(profile?.name || '').trim(),
+    role: String(profile?.role || '').trim(),
+    avatar: String(profile?.avatar || '')
       .toUpperCase()
       .replace(/[^A-Z0-9]/g, '')
       .slice(0, 2),
-    identifier: String(profileIdentifierInput?.value || '').trim()
+    identifier: String(profile?.identifier || '').trim()
   };
+}
+
+function cloneProfile(profile) {
+  return { ...normalizeProfile(profile) };
+}
+
+function profilesMatch(left, right) {
+  return ['name', 'role', 'avatar', 'identifier'].every((field) => {
+    return String(left?.[field] || '') === String(right?.[field] || '');
+  });
+}
+
+function renderAppliedProfile(profile) {
+  const nextProfile = normalizeProfile(profile);
+  const nextNameDisplay = nextProfile.name || 'Workspace User';
+  const nextRoleDisplay = nextProfile.role || 'Profile not set';
+  const nextAvatar = normalizeAvatarInitials(nextProfile.avatar, nextProfile.name);
+
+  if (topbarUserNameEl) topbarUserNameEl.textContent = nextNameDisplay;
+  if (topbarUserRoleEl) topbarUserRoleEl.textContent = nextRoleDisplay;
+  if (topbarAvatarEl) topbarAvatarEl.textContent = nextAvatar;
+}
+
+function renderProfileDraft(profile, { syncInputs = false } = {}) {
+  const nextProfile = normalizeProfile(profile);
+  const nextNameDisplay = nextProfile.name || 'Workspace User';
+  const nextRoleDisplay = nextProfile.role || 'Profile not set';
+  const nextAvatar = normalizeAvatarInitials(nextProfile.avatar, nextProfile.name);
+
+  if (syncInputs && profileNameInput) profileNameInput.value = nextProfile.name;
+  if (syncInputs && profileRoleInput) profileRoleInput.value = nextProfile.role;
+  if (syncInputs && profileAvatarInput) profileAvatarInput.value = nextProfile.avatar;
+  if (syncInputs && profileIdentifierInput) profileIdentifierInput.value = nextProfile.identifier;
+
+  if (profilePreviewNameEl) profilePreviewNameEl.textContent = nextNameDisplay;
+  if (profilePreviewRoleEl) profilePreviewRoleEl.textContent = nextRoleDisplay;
+  if (profilePreviewAvatarEl) profilePreviewAvatarEl.textContent = nextAvatar;
+}
+
+function setProfileSaveState(message) {
+  if (profileSaveStatusEl) {
+    profileSaveStatusEl.textContent = message;
+  }
+
+  if (profileSaveButton) {
+    profileSaveButton.disabled = profilesMatch(draftProfile, activeProfile);
+  }
+}
+
+function renderProfile(profile) {
+  draftProfile = cloneProfile(profile);
+  renderProfileDraft(draftProfile, { syncInputs: true });
+  renderAppliedProfile(activeProfile || draftProfile);
+  const hasSavedProfileValues = Object.values(activeProfile || {}).some((value) => String(value || '').trim());
+  setProfileSaveState(hasSavedProfileValues
+    ? 'Profile saved locally for this browser.'
+    : 'Save profile to update the workspace identity.');
+}
+
+function saveProfile() {
+  activeProfile = cloneProfile(draftProfile);
+  renderAppliedProfile(activeProfile);
+  storeProfile(activeProfile);
+
+  if (generatorIdentifierInput) {
+    generatorIdentifierInput.value = activeProfile.identifier;
+  }
+
+  updateGeneratorIdentifierData();
+  updateGeneratorEmailPreview();
+  setProfileSaveState('Profile saved locally for this browser.');
+}
+
+function updateProfileDraftFromInputs() {
+  draftProfile = getProfileFromInputs();
+  renderProfileDraft(draftProfile);
+  setProfileSaveState('Unsaved profile changes.');
+}
+
+function getProfileFromInputs() {
+  return normalizeProfile({
+    name: profileNameInput?.value,
+    role: profileRoleInput?.value,
+    avatar: profileAvatarInput?.value,
+    identifier: profileIdentifierInput?.value
+  });
 }
 
 function formatRunDate(date) {
@@ -623,11 +692,11 @@ function formatRunDate(date) {
 }
 
 function getCurrentUserLabel() {
-  const currentName = topbarUserNameEl?.textContent?.trim();
+  const currentName = String(activeProfile?.name || '').trim();
   if (currentName) return currentName;
 
-  const initial = topbarAvatarEl?.textContent?.trim();
-  return initial ? `User ${initial}` : 'Current user';
+  const initial = normalizeAvatarInitials(activeProfile?.avatar || '', activeProfile?.name || '');
+  return initial && initial !== 'U' ? `User ${initial}` : 'Workspace user';
 }
 
 function getHistoryStatusTone(status) {
@@ -1847,15 +1916,12 @@ topbarViewLinks.forEach((link) => {
 
 [profileNameInput, profileRoleInput, profileAvatarInput, profileIdentifierInput].forEach((input) => {
   if (!input) return;
-  input.addEventListener('input', () => {
-    const nextProfile = getProfileFromInputs();
-    renderProfile(nextProfile);
-    storeProfile(nextProfile);
-    if (input === profileIdentifierInput) {
-      generatorIdentifierInput.value = nextProfile.identifier;
-    }
-  });
+  input.addEventListener('input', updateProfileDraftFromInputs);
 });
+
+if (profileSaveButton) {
+  profileSaveButton.addEventListener('click', saveProfile);
+}
 
 historyEntriesEl.addEventListener('click', (event) => {
   const actionButton = event.target.closest('[data-history-action]');
@@ -1912,9 +1978,10 @@ if (previewPanel) {
 
 createSubmissionCard({}, null, { skipLimit: true });
 const storedProfile = getStoredProfile() || getDefaultProfile();
-renderProfile(storedProfile);
-if (storedProfile.identifier && generatorIdentifierInput) {
-  generatorIdentifierInput.value = storedProfile.identifier;
+activeProfile = cloneProfile(storedProfile);
+renderProfile(activeProfile);
+if (generatorIdentifierInput) {
+  generatorIdentifierInput.value = activeProfile.identifier;
 }
 applyTheme(getStoredTheme());
 setAppearancePanelOpen(false);

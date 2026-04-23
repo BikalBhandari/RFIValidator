@@ -2323,6 +2323,20 @@ body[data-theme="dark"] .generator-email-card {
   line-height: 1.5;
 }
 
+.profile-actions {
+  display: grid;
+  gap: 12px;
+  align-items: start;
+}
+
+.profile-save-button {
+  min-width: 160px;
+}
+
+.profile-save-status {
+  margin: 0;
+}
+
 .profile-preview-card {
   display: grid;
   justify-items: center;
