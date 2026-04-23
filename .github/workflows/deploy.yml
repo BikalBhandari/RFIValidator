@@ -1,0 +1,68 @@
+name: Deploy Static App
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  S3_BUCKET: ${{ vars.S3_BUCKET }}
+  CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run syntax and unit checks
+        run: |
+          npm run check
+          npm test
+
+      - name: Validate deployment configuration
+        run: |
+          test -n "$AWS_REGION"
+          test -n "$S3_BUCKET"
+          test -n "$CLOUDFRONT_DISTRIBUTION_ID"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+
+      - name: Upload runtime files to S3
+        run: |
+          aws s3 cp index.html "s3://$S3_BUCKET/index.html" --content-type text/html
+          aws s3 cp styles.css "s3://$S3_BUCKET/styles.css" --content-type text/css
+          aws s3 cp rfi-core.js "s3://$S3_BUCKET/rfi-core.js" --content-type application/javascript
+          aws s3 cp app.js "s3://$S3_BUCKET/app.js" --content-type application/javascript
+          aws s3 cp sample_rfi-entered_timestamp.csv "s3://$S3_BUCKET/sample_rfi-entered_timestamp.csv" --content-type text/csv
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+            --paths "/*"
